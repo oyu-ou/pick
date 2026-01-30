@@ -25,6 +25,47 @@ document.addEventListener("DOMContentLoaded", () => {
   let lastTime = 0;
 
   // -----------------------------
+  // TOUCH DRAG (MOBILE SUPPORT)
+  // -----------------------------
+  wheel.addEventListener("touchstart", e => {
+    if (e.touches.length !== 1) return; // only single touch
+    const touch = e.touches[0];
+    
+    // Simulate mousedown
+    isDragging = true;
+    wheel.style.transition = "none";
+    startAngle = getAngle(touch) - rotation;
+    lastAngle = rotation;
+    lastTime = Date.now();
+  }, { passive: true });
+
+  document.addEventListener("touchmove", e => {
+    if (!isDragging || e.touches.length !== 1) return;
+    const touch = e.touches[0];
+
+    const angle = getAngle(touch) - startAngle;
+    const now = Date.now();
+    
+    velocity = (angle - lastAngle) / (now - lastTime);
+    rotation = angle;
+    
+    wheel.style.transform = `rotate(${rotation}deg)`;
+    lastAngle = angle;
+    lastTime = now;
+  }, { passive: true });
+
+  document.addEventListener("touchend", e => {
+    if (!isDragging) return;
+    isDragging = false;
+
+    rotation += velocity * 600;
+    wheel.style.transition = "transform 2s cubic-bezier(0.33,1,0.68,1)";
+    wheel.style.transform = `rotate(${rotation}deg)`;
+
+    setTimeout(selectByVisualHit, 2000);
+  }, { passive: true });
+
+  // -----------------------------
   // CREATE WHEEL
   // -----------------------------
   function generateWheel() {
