@@ -60,11 +60,27 @@ p {
   color: var(--white);
 }
 
-section.logo {
+section.logo,
+footer {
   position: absolute;
   bottom: var(--n);
   right: var(--n);
-  width: 40px;
+}
+
+footer p {
+  margin: 0;
+  opacity: 0;
+}
+
+section.logo {
+  width: clamp(.8rem, 1vw, 1rem);
+  z-index: 10;
+  cursor: pointer;
+}
+
+body:has(section.logo:hover) footer p {
+  opacity: .5;
+  margin-right: clamp(1rem, 1vw, 1.2rem);
 }
 
 section.logo svg {
