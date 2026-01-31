@@ -68,6 +68,9 @@ footer {
   position: absolute;
   bottom: var(--n);
   right: var(--n);
+  height: clamp(15px, 1vw, 1rem);
+  display: flex;
+  align-items: center;
 }
 
 section.logo svg {
@@ -79,7 +82,6 @@ section.logo svg {
 
 section.logo {
   width: clamp(.8rem, 1vw, 1rem);
-  height: clamp(15px, 1vw, 1rem);
   z-index: 10;
   cursor: pointer;
 }
