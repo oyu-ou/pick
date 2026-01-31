@@ -333,6 +333,9 @@ section.result-overlay {
   font-size: calc(clamp(.6rem, 1vw, 1rem) + .1rem);
 }
 
+.chrome-only footer {
+  align-items: end;
+}
 
 
 /* query section */
