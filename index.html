@@ -49,6 +49,14 @@
   <script src="./assets/gtag.js"></script>
 </head>
 
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+    .then(() => console.log('Service Worker registered'))
+    .catch(err => console.log('Service Worker failed', err));
+}
+</script>
+
 <body>
 
   <div id="preloader" class="preloader"></div>
