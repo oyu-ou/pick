@@ -91,6 +91,14 @@
   will-change: opacity, transform;
 }
 
+#installBtn {
+    position: fixed;
+    bottom: var(--xl);
+    right: 50%;
+    transform: translate(50%, 0);
+    z-index: 105;
+}
+
 #skipBtn .logo {
   position: relative;
   bottom: unset;
@@ -113,7 +121,8 @@ section.input,
 section.logo,
 section.wheel button,
 section.wheel .pointer,
-footer {
+footer,
+#installBtn {
   transition: opacity 1.5s ease;
   opacity: 0;
 }
@@ -138,7 +147,8 @@ body.hidden section.logo,
 body.hidden section.wheel button,
 body.hidden section.wheel .pointer,
 body.hidden section.wheel #wheel::before,
-body.hidden footer {
+body.hidden footer,
+body.hidden #installBtn {
   opacity: 1;
 }
 
