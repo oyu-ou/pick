@@ -128,7 +128,13 @@
 
   <script src="assets/script.js"></script>
 
-    <button id="installBtn" style="display:none;">Install App</button>
+  <button id="installBtn">Install App</button>
+
+  <script>
+    window.addEventListener('beforeinstallprompt', e => {
+      console.log('beforeinstallprompt fired!');
+    });
+  </script>
 
   <script>
     // Debug: check if beforeinstallprompt fires

@@ -1,11 +1,10 @@
 const urlsToCache = [
-  '/picker/',
-  '/picker/index.html',
-  '/picker/style.css',
-  '/picker/app.js',
-  '/picker/manifest.json',
-  '/picker/web-app-manifest-192x192.png',
-  '/picker/web-app-manifest-512x512.png'
+  './index.html',
+  './style.css',
+  './app.js',
+  './manifest.json',
+  './web-app-manifest-192x192.png',
+  './web-app-manifest-512x512.png'
 ];
 
 self.addEventListener('install', e => {
