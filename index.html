@@ -49,35 +49,6 @@
   <script src="./assets/gtag.js"></script>
 </head>
 
-<button id="installBtn">Install App</button>
-
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js')
-    .then(() => console.log('SW registered'))
-    .catch(err => console.log(err));
-}
-
-let deferredPrompt;
-const installBtn = document.getElementById('installBtn');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  console.log('beforeinstallprompt fired!');
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display = 'block';
-});
-
-installBtn.addEventListener('click', async () => {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  const choice = await deferredPrompt.userChoice;
-  console.log(choice.outcome);
-  deferredPrompt = null;
-  installBtn.style.display = 'none';
-});
-</script>
-
 <body>
 
   <div id="preloader" class="preloader"></div>
@@ -160,6 +131,41 @@ installBtn.addEventListener('click', async () => {
   </footer>
 
   <script src="assets/script.js"></script>
+
+    <button id="installBtn" style="display:none;">Install App</button>
+
+  <script>
+    // Debug: check if beforeinstallprompt fires
+    window.addEventListener('beforeinstallprompt', e => {
+      console.log('beforeinstallprompt fired!');
+    });
+
+    // Your install button code
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'block';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const choice = await deferredPrompt.userChoice;
+      console.log(choice.outcome);
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    });
+
+    // Service worker registration (optional here)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js')
+        .then(() => console.log('SW registered'))
+        .catch(err => console.log(err));
+    }
+  </script>
 </body>
 
 </html>
