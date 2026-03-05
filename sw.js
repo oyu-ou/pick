@@ -1,11 +1,11 @@
-const CACHE_NAME = 'picker-cache-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/app.js',
-  '/web-app-manifest-192x192.png',
-  '/web-app-manifest-512x512.png'
+  '/picker/',
+  '/picker/index.html',
+  '/picker/style.css',
+  '/picker/app.js',
+  '/picker/manifest.json',
+  '/picker/web-app-manifest-192x192.png',
+  '/picker/web-app-manifest-512x512.png'
 ];
 
 self.addEventListener('install', e => {
@@ -15,4 +15,19 @@ self.addEventListener('install', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
+});
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return Promise.all(
+        urlsToCache.map(url =>
+          fetch(url).then(resp => {
+            if (!resp.ok) throw new Error(`${url} failed`);
+            return cache.put(url, resp);
+          }).catch(err => console.warn(err))
+        )
+      );
+    })
+  );
 });
