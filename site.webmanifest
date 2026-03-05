@@ -1,7 +1,7 @@
 {
   "name": "picker <3",
   "short_name": "picker",
-  "start_url": "/picker/",
+  "start_url": "/picker",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
