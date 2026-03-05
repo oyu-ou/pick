@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Random Pick",
-    "url": "https://oyu-ou.github.io/picker/",
-    "applicationCategory": "Utility",
-    "operatingSystem": "Any"
-  }
-</script>
+
 <head>
   <meta charset="UTF-8">
   <title>random picker <3</title>
@@ -21,36 +12,40 @@
   <meta name="author" content="Ou">
   <link rel="stylesheet" href="assets/style.css">
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png" />
-  <link rel="shortcut icon" href="./favicon.ico">
-  <link rel="icon" href="./favicon.ico" sizes="any">
-  <link rel="icon" type="image/svg+xml" href="./favicon.svg"/>
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"/>
+  <link rel="icon" href="assets/img/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="any" href="./assets/img/favicon-96x96.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  
   <meta name="apple-mobile-web-app-title" content="picker <3"/>
   <link rel="manifest" href="./site.webmanifest"/>
+  <meta name="theme-color" content="#000000">
 
   <meta property="og:title" content="picker <3">
   <meta property="og:description" content="Spin the wheel to make random decisions easily :*">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://oyu-ou.github.io/picker/">
-  <meta property="og:image" content="https://oyu-ou.github.io/pickerer/assets/og-preview.png">
+  <meta property="og:image" content="https://oyu-ou.github.io/picker/assets/og-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Random Pick",
+      "url": "https://oyu-ou.github.io/picker/",
+      "applicationCategory": "Utility",
+      "operatingSystem": "Any"
+    }
+  </script>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PVLV6Y013Z"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-PVLV6Y013Z');
-  </script>
+  <script src="./assets/gtag.js"></script>
 </head>
 
 <body>
@@ -65,9 +60,9 @@
       playsinline
       webkit-playsinline
       preload="auto"
-      poster="assets/preview.png"
+      poster="assets/img/preview.png"
     >
-      <source src="start_vid.mp4" type="video/mp4">
+      <source src="./assets/img/video/start_vid.mp4" type="video/mp4">
     </video>
   </div>
 
@@ -83,13 +78,13 @@
     <defs>
       <filter id="distort">
         <feTurbulence baseFrequency="0.003 0.001" numOctaves="6" result="noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="R">
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="R"/>
       </filter>
     </defs>
   </svg>
 
-  <h1 style="position: absolute; opacity: 0; pointer-events: none;">Random Picker</h1>
-  <p style="position: absolute; opacity: 0; pointer-events: none;">Free random picker wheel. Spin the wheel to make random decisions easily :*</p>
+  <h1 style="position: absolute; opacity: 0; pointer-events: none;" aria-hidden="true">Random Picker</h1>
+  <p style="position: absolute; opacity: 0; pointer-events: none;" aria-hidden="true">Free random picker wheel. Spin the wheel to make random decisions easily :*</p>
   
   <div class="ui">
     <section class="input">
@@ -106,7 +101,7 @@
         </label>
 
         <label class="color">
-          <input type="checkbox" id="toggleText" checked/>
+          <input type="checkbox" id="toggleColor" checked/>
         </label>
       </div>
     </section>

@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js");
+}
+
   /* =============================
      MOBILE SAFARI UI HIDE
   ============================= */
