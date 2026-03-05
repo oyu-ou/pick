@@ -1,27 +1,23 @@
 {
   "name": "picker <3",
   "short_name": "picker",
-  "start_url": "/picker/",
-   "display": "standalone",
+  "start_url": "./index.html",
+  "display": "standalone",
   "display_override": ["window-controls-overlay", "fullscreen", "minimal-ui"],
-  "prefer_related_applications": false,
   "background_color": "#000000",
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "/web-app-manifest-192x192.png",
+      "src": "./web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/web-app-manifest-512x512.png",
+      "src": "./web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
-  ],
-  "theme_color": "#000000",
-  "background_color": "#000000",
-  "display": "standalone"
+  ]
 }
