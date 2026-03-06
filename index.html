@@ -143,13 +143,19 @@
 
   <button id="installBtn">Install App</button>
 
-  <div id="iosOverlay">...</div>
+  <!-- Overlay for iOS install instructions -->
+  <div id="iosOverlay" style="display: none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); color:white; justify-content:center; align-items:center; text-align:center; z-index:9999;">
+    <div style="max-width:300px;">
+      <h2>Install this App</h2>
+      <p>1. Tap the Share button<br>2. Tap "Add to Home Screen"</p>
+      <button id="closeOverlayBtn" style="margin-top:20px;">Close</button>
+    </div>
+  </div>
+
   <script>
     let deferredPrompt;
     const installBtn = document.getElementById('installBtn');
-
-    // iOS overlay element (create a div with id="iosInstallOverlay" in HTML)
-    const iosOverlay = document.getElementById('iosInstallOverlay');
+    const iosOverlay = document.getElementById('iosOverlay'); // must match the div id
 
     // Detect install availability (Android / Desktop)
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -165,8 +171,7 @@
       const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
       if (isIOS && isSafari && !deferredPrompt) {
-        // Show your overlay instead of alert
-        iosOverlay.style.display = 'flex'; // or 'block', depending on your CSS
+        iosOverlay.style.display = 'flex'; // show overlay
         return;
       }
 
@@ -179,8 +184,8 @@
       }
     });
 
-    // Optional: Close overlay when clicked
-    iosOverlay.addEventListener('click', () => {
+    // Close overlay button
+    document.getElementById('closeOverlayBtn').addEventListener('click', () => {
       iosOverlay.style.display = 'none';
     });
   </script>
