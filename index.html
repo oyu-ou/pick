@@ -145,31 +145,26 @@
 
   <script>
     let deferredPrompt;
-    const installBtn = document.getElementById("installBtn");
+    const installBtn = document.getElementById('installBtn');
 
-    installBtn.style.display = "none";
-
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.style.display = "block";
+    window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('INSTALL EVENT FIRED');
+      e.preventDefault(); // prevent automatic install prompt
+      deferredPrompt = e; // save event for later
+      installBtn.style.display = 'block'; // show button
     });
 
-    installBtn.addEventListener("click", async () => {
-
-      const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-      if (isIOS && isSafari && !deferredPrompt) {
-        alert("To install:\n1. Tap Share\n2. Tap 'Add to Home Screen'");
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) {
+        alert("Install not available yet");
         return;
       }
 
-    });
-
-    window.addEventListener("appinstalled", () => {
-      console.log("App installed");
-      installBtn.style.display = "none";
+      deferredPrompt.prompt(); // show install prompt
+      const choice = await deferredPrompt.userChoice;
+      console.log(choice.outcome); // "accepted" or "dismissed"
+      deferredPrompt = null;
+      installBtn.style.display = 'none'; // hide after install
     });
   </script>
 </body>
