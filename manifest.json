@@ -2,7 +2,7 @@
   "id": "/picker/",
   "name": "picker <3",
   "short_name": "Picker",
-  "start_url": "./picker",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",

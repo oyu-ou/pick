@@ -143,7 +143,6 @@
 
   <button id="installBtn">Install App</button>
 
-  <!-- Overlay for iOS install instructions -->
   <div id="iosOverlay" style="display: none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); color:white; justify-content:center; align-items:center; text-align:center; z-index:9999;">
     <div style="max-width:300px;">
       <h2>Install this App</h2>
@@ -153,13 +152,12 @@
   </div>
 
   <script>
-    let deferredPrompt;
     const installBtn = document.getElementById('installBtn');
-    const iosOverlay = document.getElementById('iosOverlay'); // must match the div id
+    const iosOverlay = document.getElementById('iosOverlay');
+    let deferredPrompt;
 
-    // Detect install availability (Android / Desktop)
+    // Detect install availability (Android / Chrome)
     window.addEventListener('beforeinstallprompt', (e) => {
-      console.log('INSTALL EVENT FIRED');
       e.preventDefault();
       deferredPrompt = e;
       installBtn.style.display = 'block';
@@ -170,11 +168,13 @@
       const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
       const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-      if (isIOS && isSafari && !deferredPrompt) {
-        iosOverlay.style.display = 'flex'; // show overlay
+      if (isIOS && isSafari) {
+        // always show overlay for iOS Safari
+        iosOverlay.style.display = 'flex';
         return;
       }
 
+      // Android / Chrome install
       if (deferredPrompt) {
         deferredPrompt.prompt();
         const choice = await deferredPrompt.userChoice;
