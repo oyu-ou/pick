@@ -1,27 +1,22 @@
 {
-  "name": "picker <3",
-  "short_name": "picker",
-  "start_url": "./picker",
+  "id": "/picker/",
+  "name": "Random Picker",
+  "short_name": "Picker",
+  "start_url": "/picker/",
   "display": "standalone",
-  "display_override": [
-    "window-controls-overlay",
-    "fullscreen",
-    "minimal-ui"
-  ],
   "background_color": "#000000",
   "theme_color": "#000000",
+  "description": "Spin the wheel and pick something randomly.",
   "icons": [
     {
-      "src": "./web-app-manifest-192x192.png",
+      "src": "/picker/web-app-manifest-192x192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     },
     {
-      "src": "./web-app-manifest-512x512.png",
+      "src": "/picker/web-app-manifest-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     }
   ]
 }
