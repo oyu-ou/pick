@@ -144,29 +144,28 @@
   <button id="installBtn">Install App</button>
 
   <script>
-    window.addEventListener('beforeinstallprompt', e => {
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
       console.log('INSTALL EVENT FIRED');
+      e.preventDefault(); // prevent automatic install prompt
+      deferredPrompt = e; // save event for later
+      installBtn.style.display = 'block'; // show button
     });
-  </script>
 
-  <script>
-  let deferredPrompt;
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) {
+        alert("Install not available yet");
+        return;
+      }
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-  });
-
-  document.getElementById('installBtn').addEventListener('click', async () => {
-    if (!deferredPrompt) {
-      alert("Install not available yet");
-      return;
-    }
-
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
-  });
+      deferredPrompt.prompt(); // show install prompt
+      const choice = await deferredPrompt.userChoice;
+      console.log(choice.outcome); // "accepted" or "dismissed"
+      deferredPrompt = null;
+      installBtn.style.display = 'none'; // hide after install
+    });
   </script>
 </body>
 
