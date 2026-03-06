@@ -142,29 +142,44 @@
   <script src="./script.js"></script>
 
   <button id="installBtn">Install App</button>
-
   <script>
     let deferredPrompt;
     const installBtn = document.getElementById('installBtn');
 
+    // iOS overlay element (create a div with id="iosInstallOverlay" in HTML)
+    const iosOverlay = document.getElementById('iosInstallOverlay');
+
+    // Detect install availability (Android / Desktop)
     window.addEventListener('beforeinstallprompt', (e) => {
       console.log('INSTALL EVENT FIRED');
-      e.preventDefault(); // prevent automatic install prompt
-      deferredPrompt = e; // save event for later
-      installBtn.style.display = 'block'; // show button
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'block';
     });
 
+    // Button click
     installBtn.addEventListener('click', async () => {
-      if (!deferredPrompt) {
-        alert("Install not available yet");
+      const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+      if (isIOS && isSafari && !deferredPrompt) {
+        // Show your overlay instead of alert
+        iosOverlay.style.display = 'flex'; // or 'block', depending on your CSS
         return;
       }
 
-      deferredPrompt.prompt(); // show install prompt
-      const choice = await deferredPrompt.userChoice;
-      console.log(choice.outcome); // "accepted" or "dismissed"
-      deferredPrompt = null;
-      installBtn.style.display = 'none'; // hide after install
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        console.log(choice.outcome); // accepted or dismissed
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+      }
+    });
+
+    // Optional: Close overlay when clicked
+    iosOverlay.addEventListener('click', () => {
+      iosOverlay.style.display = 'none';
     });
   </script>
 </body>
