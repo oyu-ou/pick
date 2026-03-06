@@ -67,7 +67,7 @@
   justify-content: center;
   transition: opacity 1.5s ease;
   will-change: opacity, transform;
-  background-image: url(./preview.png);
+  background-image: url(./assets/img/preview.png);
   background-size: cover;
   background-position: center;
 }
